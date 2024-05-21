@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const UserController = require('../controllers/User.controller');
 const TaskController = require('../controllers/Task.controller');
-const { getUserInstance } = require('../middlewares/user.mv');
+const { getUserInstance, validateUser } = require('../middlewares/user.mv');
 
 const router = Router();
 
 // POST http://localhost:5000/api/user
-router.post('/user', UserController.createUser);
+router.post('/user', validateUser, UserController.createUser);
 // GET http://localhost:5000/api/users
 router.get('/users', UserController.findAll);
 // GET http://localhost:5000/api/user/25

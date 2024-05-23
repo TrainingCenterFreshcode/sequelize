@@ -35,6 +35,16 @@ module.exports = {
         },
         onDelete: 'cascade',
         onUpdate: 'cascade'
+      },
+      createdAt: {
+        field: 'created_at',
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        field: 'updated_at',
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },

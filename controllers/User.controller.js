@@ -121,6 +121,7 @@ module.exports.getUserWithGroups = async (req, res, next) => {
         //     include: [Group] // LEFT JOIN
         // });
         const userWithGroups = await User.findByPk(userId, {
+            attributes: ['id', 'first_name', 'last_name'], // працює на таблицю users
             include: { // INNER JOIN
                 model: Group,
                 required: true,
@@ -134,6 +135,12 @@ module.exports.getUserWithGroups = async (req, res, next) => {
         if(!userWithGroups) {
             throw new UserError('User not found');
         }
+
+        // Перед відправкою на сервер - видаляємо пароль з результату запиту
+        // Перетворити userWithGroups як об'єкт JSON
+        // const userWithGroupsJSON = userWithGroups.toJSON();
+        // Видаляємо поле password з JSON
+        // delete userWithGroupsJSON.password;
 
         return res.status(200).send(userWithGroups);
     } catch (error) {

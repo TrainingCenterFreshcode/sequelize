@@ -45,3 +45,24 @@ module.exports.getUserGroups = async(req, res, next) => {
     next(error);
   }
 }
+
+module.exports.deleteUserFromGroup = async(req, res, next) => {
+  try {
+    const { userInstance, params: { groupId } } = req;
+
+    // 1. Знайти сутність групи, з якої ми видаляємо користувача
+    const groupInstance  = await Group.findByPk(groupId);
+
+    // 2. Видалити користувача з групи
+    // parent.removeChild(child)
+    const rowCount = await groupInstance.removeUser(userInstance);
+
+    if(rowCount) {
+      return res.status(200).send('User successfully deleted');
+    } else {
+      return res.status(400).send('User is never been in this group');
+    }
+  } catch (error) {
+    next(error);
+  }
+}

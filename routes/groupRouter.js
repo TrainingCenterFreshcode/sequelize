@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 const groupRouter = Router();
 
@@ -38,7 +38,7 @@ module.exports = groupRouter;
 /*
 
 + 1. Як фізично передати файл на сервер? Яз зберегти файл на сервері
-2. Як прописати шлях до файлу (image_path) відповідній групі
++ 2. Як прописати шлях до файлу (image_path) відповідній групі
 3. Як отримати файл з серверу
 
 */

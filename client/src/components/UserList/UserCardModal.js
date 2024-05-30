@@ -1,6 +1,8 @@
 import Modal from 'react-modal';
 import React from 'react';
 
+Modal.setAppElement('#root');
+
 const customStyles = {
   content: {
     top: '50%',

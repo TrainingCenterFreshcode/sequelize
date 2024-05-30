@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getUsers } from '../../api';
 import UserCard from './UserCard';
 import UserCardModal from './UserCardModal';
+import AddUserFormModal from './AddUserFormModal';
 import './style.css';
 
 const UserList = () => {
@@ -10,7 +11,8 @@ const UserList = () => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Модалка перегляду інфи конкретного користувача
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false); // Модалка додавання коритсувача
 
   const loadUsers = (pageNumber) => {
     getUsers(pageNumber)
@@ -54,22 +56,28 @@ const UserList = () => {
   return (
     <>
       <h1>User List</h1>
+      <button onClick={() => setIsModalAddOpen(true)}>Add user</button>
 
       {isLoading && <h2 className='loading'>Loading....</h2>}
       <section className='card-container'>
         {users.length > 0 ? renderUsers() : <h2 className='error'>Users not found</h2>}
       </section>
-      {/* Модальне вікно */}
-      <UserCardModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        selectedUser={selectedUser}
-      />
 
       <div>
         <button onClick={prevBtnHandler} disabled={page === 1}>Previous page</button>
         <button onClick={nextBtnHandler} disabled={users.length < 5}>Next page</button>
       </div>
+
+      {/* Модальні вікна */}
+      <UserCardModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        selectedUser={selectedUser}
+      />
+      <AddUserFormModal
+        isModalOpen={isModalAddOpen}
+        setIsModalOpen={setIsModalAddOpen}
+      />
     </>
   );
 }

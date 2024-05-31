@@ -55,6 +55,7 @@ const GroupList = () => {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         selectedGroup={selectedGroup}
+        loadGroups={loadGroups}
       />
       <AddGroupFormModal
         isModalOpen={isModalAddOpen}

@@ -55,3 +55,17 @@ export const createGroup = async (groupData) => {
 
   return data;
 }
+
+export const createGroupImage = async(image, groupId) => {
+  const url = `http://localhost:5001/api/groups/${groupId}`;
+
+  const requestOptions = {
+    method: 'POST',
+    body: image
+  }
+
+  const response = await fetch(url, requestOptions);
+  const data = await response.json();
+
+  return data;
+}

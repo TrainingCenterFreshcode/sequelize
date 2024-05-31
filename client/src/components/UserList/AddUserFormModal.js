@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { USER_SCHEMA } from '../../schemas';
+import { createUser } from '../../api';
 
 Modal.setAppElement('#root');
 
@@ -27,8 +28,10 @@ const initialState = {
 
 const AddUserFormModal = (props) => {
 
-  const handleSubmitToFormik = (values, actions) => {
-    console.log(values);
+  const handleSubmitToFormik = async (values, actions) => {
+    const serverResponse = await createUser(values);
+    console.log(serverResponse); // доданий юзер, який повертається з БД
+    props.setIsModalOpen(false);
     actions.resetForm();
   }
 

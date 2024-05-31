@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getGroups } from '../../api';
 import GroupCard from './GroupCard';
 import GroupCardModal from './GroupCardModal';
+import AddGroupFormModal from './AddGroupFormModal';
 
 const GroupList = () => {
   const [groups, setGroups] = useState([]);
@@ -42,6 +43,7 @@ const GroupList = () => {
   return (
     <>
       <h1>Group List</h1>
+      <button onClick={() => setIsModalAddOpen(true)}>Add group</button>
 
       {isLoading && <h2 className='loading'>Loading....</h2>}
       <section className='card-container'>
@@ -53,6 +55,11 @@ const GroupList = () => {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         selectedGroup={selectedGroup}
+      />
+      <AddGroupFormModal
+        isModalOpen={isModalAddOpen}
+        setIsModalOpen={setIsModalAddOpen}
+        loadGroups={loadGroups}
       />
     </>
   );

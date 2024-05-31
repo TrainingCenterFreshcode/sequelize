@@ -35,6 +35,23 @@ export const getGroups = async () => {
 
   const response = await fetch(url);
   const data = await response.json();
-  
+
+  return data;
+}
+
+export const createGroup = async (groupData) => {
+  const url = 'http://localhost:5001/api/groups';
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(groupData)
+  }
+
+  const response = await fetch(url, requestOptions);
+  const data = await response.json();
+
   return data;
 }

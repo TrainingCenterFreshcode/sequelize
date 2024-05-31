@@ -22,6 +22,8 @@ const groupRouter = Router();
 // group routes section
 // POST http://localhost:5000/api/groups
 groupRouter.post('/', GroupController.createGroup);
+// GET http://localhost:5000/api/groups
+groupRouter.get('/', GroupController.getAllGroups);
 // PUT http://localhost:5000/api/groups/:userId/:groupId
 groupRouter.put('/:userId/:groupId', getUserInstance, GroupController.addUserToGroup);
 // GET http://localhost:5000/api/groups/:userId

@@ -114,3 +114,13 @@ module.exports.createGroupImage = async(req, res, next) => {
     next(error);
   }
 }
+
+module.exports.getAllGroups = async(req, res, next) => {
+  try {
+    const allGroups = await Group.findAll();
+
+    return res.status(200).send(allGroups);
+  } catch (error) {
+    next(error);
+  }
+}
